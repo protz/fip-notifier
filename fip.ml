@@ -29,7 +29,7 @@ let _ =
   } in
   let current_cover = ref "" in
 
-  while true do
+  while true do try
     (* The entry that we're about to build. *)
     let entry = { artist = ""; title = ""; year = ""; cover_url = ""; album = "" } in
     (* We have a state machine. We're either before the current entry, inside
@@ -93,5 +93,10 @@ let _ =
     end;
 
     Unix.sleep 5
+
+  with
+  | Curl.CurlException _
+  | Yojson.Json_error _ ->
+      ()
   done
 ;;
