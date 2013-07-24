@@ -4,7 +4,8 @@ let fetch (url: string) (f: string -> int): unit =
   Curl.set_url c url;
   Curl.set_followlocation c true;
   Curl.set_writefunction c f;
-  Curl.perform c
+  Curl.perform c;
+  Curl.cleanup c
 ;;
 
 (* [get url] fetches the document at [url] and returns its contents as a string. *)
