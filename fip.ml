@@ -2,6 +2,7 @@ open Title
 
 type state = Before | Inside | After
 
+(* Fetch the JSON file from FIP's website, and then extract the raw HTML from it. *)
 let fetch_html () =
   (* The JSON has a very specific structure, so it's easy to extract the html
    * bits from it. *)
@@ -13,6 +14,7 @@ let fetch_html () =
     | _ -> assert false
   in
   html
+;;
 
 let _ =
   (* We keep a current state, and try to refresh it every five seconds. We use
@@ -71,7 +73,7 @@ let _ =
 
       (* Fix and download the new cover. *)
       let cover_url =
-        if entry.cover_url.[0] = '/' then
+        if String.length entry.cover_url > 0 && entry.cover_url.[0] = '/' then
           Config.fip_root ^ entry.cover_url
         else
           entry.cover_url
@@ -92,3 +94,4 @@ let _ =
 
     Unix.sleep 5
   done
+;;

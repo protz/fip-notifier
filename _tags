@@ -1,1 +1,1 @@
-true: package(unix), package(curl), package(yojson), use_str
+true: package(unix), package(curl), package(yojson), use_str, debug
