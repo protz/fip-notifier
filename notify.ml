@@ -17,4 +17,6 @@ let notify (title: Title.t) (img: string): unit =
           title.album
           title.year
       |]
+  else
+    ignore (Unix.wait ())
 ;;
